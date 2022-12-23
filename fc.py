@@ -61,7 +61,125 @@ def requestTraffic(city):
     print(res)
 
 
-if __name__ == "__main__":
-    requestTraffic("Milpitas")
+# Sports API pulling for live matches
+# We'll be using Python Requests in order to obtain results
+import requests
+from encryption import sapi
+
+# We'll start with football.
+def footballLive():
+    url = "https://sports-live-scores.p.rapidapi.com/football/live"
+
+    headers = {
+        "X-RapidAPI-Key": sapi,
+        "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+    }
+
+    currentGames = {}
+    currentScores = {}
+    response = requests.request("GET", url, headers=headers)
+    response = response.json()
+    games = response["matches"]
+    c = 0
+    for game in games:
+        currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+        currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+        c += 1
+    
+    x = input("Which game would you like to pick?\n").lower()
+    x = x.strip("game")
+    x = int(x)
+    message += currentGames[f"Result {x}"]
+    message += "\n"
+    message += currentScores[f"Result {x}"]
+    return message
+
+# Then tennis.
+def tennisLive():
+    url = "https://sports-live-scores.p.rapidapi.com/tennis/live"
+
+    headers = {
+        "X-RapidAPI-Key": sapi,
+        "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+    }
+
+    currentGames = {}
+    currentScores = {}
+    response = requests.request("GET", url, headers=headers)
+    response = response.json()
+    games = response["matches"]
+    c = 0
+    for game in games:
+        currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+        currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+        c += 1
+    
+    x = input("Which game would you like to pick?\n").lower()
+    x = x.strip("game")
+    x = int(x)
+    message += currentGames[f"Result {x}"]
+    message += "\n"
+    message += currentScores[f"Result {x}"]
+    return message
+
+# Then basketball.
+def basketballLive():
+    message = ""
+    url = "https://sports-live-scores.p.rapidapi.com/basketball/live"
+
+    headers = {
+        "X-RapidAPI-Key": sapi,
+        "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+    }
+    
+    currentGames = {}
+    currentScores = {}
+    response = requests.request("GET", url, headers=headers)
+    response = response.json()
+    games = response["matches"]
+    c = 0
+    for game in games:
+        currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+        currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+        c += 1
+    
+    x = input("Which game would you like to pick?\n").lower()
+    x = x.strip("game")
+    x = int(x)
+    message += currentGames[f"Result {x}"]
+    message += "\n"
+    message += currentScores[f"Result {x}"]
+    return message
+
+# Then baseball.
+def baseballLive():
+    url = "https://sports-live-scores.p.rapidapi.com/baseball/live"
+
+    headers = {
+        "X-RapidAPI-Key": sapi,
+        "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+    }
+
+    currentGames = {}
+    currentScores = {}
+    response = requests.request("GET", url, headers=headers)
+    response = response.json()
+    games = response["matches"]
+    c = 0
+    for game in games:
+        currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+        currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+        c += 1
+    
+    x = input("Which game would you like to pick?\n").lower()
+    x = x.strip("game")
+    x = int(x)
+    message += currentGames[f"Result {x}"]
+    message += "\n"
+    message += currentScores[f"Result {x}"]
+    return message
+
+    
+
 
 

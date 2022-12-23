@@ -15,7 +15,6 @@ def compose(user):
     
     # Weather api
     weatherData = requestWeather(user.city)
-    print(weatherData)
     message += f"\nWeather is looking like {weatherData[4]}.\n"
     message += f"Today, it feels like {weatherData[1]:.0f}° degree fahrenheit.\n"
     message += f"Looks like low of {weatherData[2]:.0f}°, and high of {weatherData[3]:.0f}° degrees.\n"
