@@ -1,5 +1,4 @@
 # Let's start with APIs.
-
 # We will pull weather data.
 import requests
 from encryption import wapi, napi, tapi # Importing api keys
@@ -59,6 +58,19 @@ def requestTraffic(city):
     main = "https://" + base + "/traffic/trafficstats/status/1/{job_id}?key={Your_API_Key}"
     res = requests.get(main)
     print(res)
+
+# Reminder section 
+from person import Person
+def addReminder(person: Person, reminder):
+    person.addReminder(reminder)
+    with open(f"{person.name}rm.txt", "a+") as f:
+        f.write(f"{reminder}\n")
+    
+def removeReminder(person: Person, reminder):
+    person.removeReminder(reminder)
+    with open(f"{person.name}rm.txt", "w+") as f:
+        for _ in range(len(person.reminders)):
+            f.write(f"{person.reminders[_]}\n")
 
 
 # Sports API pulling for live matches
@@ -179,7 +191,119 @@ def baseballLive():
     message += currentScores[f"Result {x}"]
     return message
 
-    
+class Sport:
+    def footballLive():
+        url = "https://sports-live-scores.p.rapidapi.com/football/live"
+
+        headers = {
+            "X-RapidAPI-Key": sapi,
+            "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+        }
+
+        currentGames = {}
+        currentScores = {}
+        response = requests.request("GET", url, headers=headers)
+        response = response.json()
+        games = response["matches"]
+        c = 0
+        for game in games:
+            currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+            currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+            c += 1
+        
+        x = input("Which game would you like to pick?\n").lower()
+        x = x.strip("game")
+        x = int(x)
+        message += currentGames[f"Result {x}"]
+        message += "\n"
+        message += currentScores[f"Result {x}"]
+        return message
+
+    # Then tennis.
+    def tennisLive():
+        url = "https://sports-live-scores.p.rapidapi.com/tennis/live"
+
+        headers = {
+            "X-RapidAPI-Key": sapi,
+            "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+        }
+
+        currentGames = {}
+        currentScores = {}
+        response = requests.request("GET", url, headers=headers)
+        response = response.json()
+        games = response["matches"]
+        c = 0
+        for game in games:
+            currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+            currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+            c += 1
+        
+        x = input("Which game would you like to pick?\n").lower()
+        x = x.strip("game")
+        x = int(x)
+        message += currentGames[f"Result {x}"]
+        message += "\n"
+        message += currentScores[f"Result {x}"]
+        return message
+
+    # Then basketball.
+    def basketballLive():
+        message = ""
+        url = "https://sports-live-scores.p.rapidapi.com/basketball/live"
+
+        headers = {
+            "X-RapidAPI-Key": sapi,
+            "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+        }
+        
+        currentGames = {}
+        currentScores = {}
+        response = requests.request("GET", url, headers=headers)
+        response = response.json()
+        games = response["matches"]
+        c = 0
+        for game in games:
+            currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+            currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+            c += 1
+        
+        x = input("Which game would you like to pick?\n").lower()
+        x = x.strip("game")
+        x = int(x)
+        message += currentGames[f"Result {x}"]
+        message += "\n"
+        message += currentScores[f"Result {x}"]
+        return message
+
+    # Then baseball.
+    def baseballLive():
+        url = "https://sports-live-scores.p.rapidapi.com/baseball/live"
+
+        headers = {
+            "X-RapidAPI-Key": sapi,
+            "X-RapidAPI-Host": "sports-live-scores.p.rapidapi.com"
+        }
+
+        currentGames = {}
+        currentScores = {}
+        response = requests.request("GET", url, headers=headers)
+        response = response.json()
+        games = response["matches"]
+        c = 0
+        for game in games:
+            currentGames[f"Result {c+1}"] = f"{game['Home Team']} vs. {game['Away Team']}\n{game['League']}, currently in {game['Status']}"
+            currentScores[f"Result {c+1}"] = f"{game['Home Score']} to {game['Away Score']}"
+            c += 1
+        
+        x = input("Which game would you like to pick?\n").lower()
+        x = x.strip("game")
+        x = int(x)
+        message += currentGames[f"Result {x}"]
+        message += "\n"
+        message += currentScores[f"Result {x}"]
+        return message
+
 
 
 
